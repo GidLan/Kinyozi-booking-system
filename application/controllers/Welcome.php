@@ -20,6 +20,25 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->helper('url');
+		$this->load->database();
 		$this->load->view('welcome_message');
 	}
+
+public function savingdata()
+{
+	$this->load->helper('url');
+	//this array is used to get fetch data from the view page.
+	$data = array(
+		'Name'     => $this->input->post('Name'),
+		'Phone_number'  => $this->input->post('phone_number'),
+		'check-in'   => $this->input->post('check-in'),
+
+	);
+	//insert data into database table.
+	$this->db->insert('bookings',$data);
+
+	$this->load->view('booking_successful');
 }
+}
+
